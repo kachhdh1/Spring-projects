@@ -7,4 +7,8 @@
 	
 	<bean id="diaryService" class="com.virtualpairprogrammers.services.diary.DiaryManagementServiceMockImpl"/>
 
+	<bean id="callService" class="com.virtualpairprogrammers.services.calls.CallHandlingServiceImpl">
+		<constructor-arg ref="customerService"/>
+		<constructor-arg ref="diaryService"/>
+	</bean>
 </beans>
