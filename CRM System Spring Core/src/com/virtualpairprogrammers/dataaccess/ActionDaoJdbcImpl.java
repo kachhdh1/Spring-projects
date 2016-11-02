@@ -1,4 +1,4 @@
-/*package com.virtualpairprogrammers.dataaccess;
+package com.virtualpairprogrammers.dataaccess;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -75,4 +75,3 @@ class ActionRowMapper implements RowMapper<Action>
 		return new Action("" + actionId, details, requiredByCal, owningUser, complete);
 	}	
 }
-*/

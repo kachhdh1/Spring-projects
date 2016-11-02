@@ -2,6 +2,7 @@ package com.virtualpairprogrammers.services.customers;
 
 import java.util.List;
 
+import com.virtualpairprogrammers.dataaccess.RecordNotFoundException;
 import com.virtualpairprogrammers.domain.Call;
 import com.virtualpairprogrammers.domain.Customer;
 
@@ -21,13 +22,16 @@ public interface CustomerManagementService
 	
 	/**
 	 * The specified customer is updated in the database.
+	 * @throws CustomerNotFoundException 
 	 */
-	public void updateCustomer(Customer changedCustomer);
+	public void updateCustomer(Customer changedCustomer) throws CustomerNotFoundException;
 	
 	/**
 	 * The specified customer is removed from the database
+	 * @throws CustomerNotFoundException 
+	 * @throws RecordNotFoundException 
 	 */
-	public void deleteCustomer(Customer oldCustomer);
+	public void deleteCustomer(Customer oldCustomer) throws CustomerNotFoundException;
 	
 	/**
 	 * Finds the customer by Id
