@@ -10,6 +10,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.virtualpairprogrammers.domain.Action;
 import com.virtualpairprogrammers.domain.Call;
 import com.virtualpairprogrammers.domain.Customer;
+import com.virtualpairprogrammers.practice.beans.DummyBean;
+import com.virtualpairprogrammers.practice.beans.MyHelper;
 import com.virtualpairprogrammers.services.calls.CallHandlingService;
 import com.virtualpairprogrammers.services.customers.CustomerManagementService;
 import com.virtualpairprogrammers.services.customers.CustomerNotFoundException;
@@ -21,28 +23,7 @@ public class SimpleClientTest {
 	{
 		ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
 		
-		CustomerManagementService customerService = container.getBean(CustomerManagementService.class);
-		CallHandlingService callService = container.getBean(CallHandlingService.class);
 		DiaryManagementService diaryService = container.getBean(DiaryManagementService.class);
-		
-		customerService.newCustomer(new Customer("CS03939", "Acme", "Good Customer"));
-		
-		Call newCall = new Call("Larry Wall called from Acme Corp");
-		Action action1 = new Action("Call back Larry to ask how things are going", new GregorianCalendar(2016, 0, 0), "rac");
-		Action action2 = new Action("Check our sales dept to make sure Larry is being tracked", new GregorianCalendar(2016, 0, 0), "rac");		
-		
-		List<Action> actions = new ArrayList<Action>();
-		actions.add(action1);
-		actions.add(action2);
-		
-		try
-		{
-			callService.recordCall("CS03939", newCall, actions);
-		}
-		catch (CustomerNotFoundException e)
-		{
-			System.out.println("That customer doesn't exist");
-		}
 		
 		System.out.println("Here are the outstanding actions:");
 		Collection<Action> incompleteActions = diaryService.getAllIncompleteActions("rac");
@@ -50,8 +31,24 @@ public class SimpleClientTest {
 		{
 			System.out.println(next);
 		}
+		
+		//************* testing spring core concepts****************
+		DummyBean abstractBean = (DummyBean) container.getBean("abstractLookupBean");
+		DummyBean standardBean = (DummyBean) container.getBean("standardLookupBean");
+
+        displayInfo(standardBean);
+        displayInfo(abstractBean);
+		//************* testing spring core concepts ends **********
 				
 		container.close();
+	}
+
+	private static void displayInfo(DummyBean bean) {
+		 MyHelper helper1 = bean.getMyHelper();
+	     MyHelper helper2 = bean.getMyHelper();
+
+	     System.out.println("Helper Instances the Same?:"+bean +" : "
+	            + (helper1 == helper2));
 	}
 
 }

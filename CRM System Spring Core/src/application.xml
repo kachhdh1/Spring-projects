@@ -1,6 +1,8 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"  
-            "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
-<beans>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!--  Data source -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -33,9 +35,22 @@
 		<constructor-arg ref="actionDao"/>
 	</bean>
 	
-	<bean id="callService" class="com.virtualpairprogrammers.services.calls.CallHandlingServiceImpl">	
+	<bean id="callService" class="com.virtualpairprogrammers.services.calls.CallHandlingServiceImpl" >	
 		<constructor-arg ref="customerService"/>
 		<constructor-arg ref="diaryService"/>	
 	</bean>
-
+	
+	<!-- ******************** testing spring core concepts ********************* -->
+	<bean id="helper" class="com.virtualpairprogrammers.practice.beans.MyHelper" scope="prototype"/>
+	
+	<bean id="standardLookupBean" class="com.virtualpairprogrammers.practice.beans.StandardLookupDemoBean">
+		<property name="myHelper" ref="helper" />
+	</bean>
+	
+	<bean id="abstractLookupBean" class="com.virtualpairprogrammers.practice.beans.AbstractLookupDemoBean">
+		<!-- this method is used to inject a different life cycle bean into singleton beans 
+		lookup method will be overriden by the spring-->
+		<lookup-method name="getMyHelper" bean="helper"/> 
+	</bean>
+	<!-- ******************** testing spring core concepts ends **************** -->
 </beans>
