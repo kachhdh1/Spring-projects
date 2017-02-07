@@ -33,13 +33,19 @@ public class SimpleClientTest {
 		}
 		
 		//************* testing spring core concepts****************
-		DummyBean abstractBean = (DummyBean) container.getBean("abstractLookupBean");
-		DummyBean standardBean = (DummyBean) container.getBean("standardLookupBean");
-
-        displayInfo(standardBean);
-        displayInfo(abstractBean);
+		MyHelper helper = (MyHelper) container.getBean("myHelper");
+		helper.doSomethingHelpful();
+		
+		/*
+		 * The method automatically instructs Spring to register a shutdown hook
+		 * of the underlying JVM runtime. Since stand alone application have multiple
+		 * exit point, destroy method is called only when we are calling either 
+		 * close or destroy method on AbstractApplicationContext.
+		 */
+		container.registerShutdownHook();
+		
 		//************* testing spring core concepts ends **********
-				
+	
 		container.close();
 	}
 

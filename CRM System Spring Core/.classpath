@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbcp-1.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-pool-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aop-4.0.2.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

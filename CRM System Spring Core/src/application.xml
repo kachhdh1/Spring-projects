@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:aop="http://www.springframework.org/schema/aop"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/aop
+          http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!--  Data source -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -41,16 +47,15 @@
 	</bean>
 	
 	<!-- ******************** testing spring core concepts ********************* -->
-	<bean id="helper" class="com.virtualpairprogrammers.practice.beans.MyHelper" scope="prototype"/>
 	
-	<bean id="standardLookupBean" class="com.virtualpairprogrammers.practice.beans.StandardLookupDemoBean">
-		<property name="myHelper" ref="helper" />
-	</bean>
+	<!-- since we are using annotations other than simple core one which is @component etc,
+	we need to use this tag annotation config. Because if we omit this, spring wont be 
+	able to pick the annotations @preDesproy. 
+	This will also need to have AOP jars in the classpath so that all the annotations
+	over the beans works correctly. -->
+    <context:annotation-config /> 
 	
-	<bean id="abstractLookupBean" class="com.virtualpairprogrammers.practice.beans.AbstractLookupDemoBean">
-		<!-- this method is used to inject a different life cycle bean into singleton beans 
-		lookup method will be overriden by the spring-->
-		<lookup-method name="getMyHelper" bean="helper"/> 
-	</bean>
+	<bean id="myHelper" class="com.virtualpairprogrammers.practice.beans.MyHelper"/>
+	
 	<!-- ******************** testing spring core concepts ends **************** -->
 </beans>
