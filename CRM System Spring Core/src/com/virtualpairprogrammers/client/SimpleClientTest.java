@@ -11,6 +11,7 @@ import com.virtualpairprogrammers.domain.Action;
 import com.virtualpairprogrammers.domain.Call;
 import com.virtualpairprogrammers.domain.Customer;
 import com.virtualpairprogrammers.practice.beans.DummyBean;
+import com.virtualpairprogrammers.practice.beans.Employee;
 import com.virtualpairprogrammers.practice.beans.MyHelper;
 import com.virtualpairprogrammers.services.calls.CallHandlingService;
 import com.virtualpairprogrammers.services.customers.CustomerManagementService;
@@ -33,16 +34,12 @@ public class SimpleClientTest {
 		}
 		
 		//************* testing spring core concepts****************
-		MyHelper helper = (MyHelper) container.getBean("myHelper");
-		helper.doSomethingHelpful();
 		
-		/*
-		 * The method automatically instructs Spring to register a shutdown hook
-		 * of the underlying JVM runtime. Since stand alone application have multiple
-		 * exit point, destroy method is called only when we are calling either 
-		 * close or destroy method on AbstractApplicationContext.
-		 */
-		container.registerShutdownHook();
+		//even though we are getting the instance of the factory bean,
+		//but we will get the Employee instance in return based on
+		//the type defined.
+		Employee manager = (Employee) container.getBean("empFac");
+		System.out.println(manager);
 		
 		//************* testing spring core concepts ends **********
 	
