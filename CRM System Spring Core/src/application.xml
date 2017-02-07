@@ -55,7 +55,13 @@
 	over the beans works correctly. -->
     <context:annotation-config /> 
 	
-	<bean id="myHelper" class="com.virtualpairprogrammers.practice.beans.MyHelper"/>
+	<!-- even if the type of the bean is employee factory but getting the bean
+	instance from the container will eject a type of employee bean only. The return type
+	is defined in the function "createEmployeeOfType" -->
+	<bean id="empFac" class="com.virtualpairprogrammers.practice.beans.EmployeeFactoryBean" 
+		factory-method="createEmployeeOfType">
+		<constructor-arg value="manager"/>
+	</bean>
 	
 	<!-- ******************** testing spring core concepts ends **************** -->
 </beans>
