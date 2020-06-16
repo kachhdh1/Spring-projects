@@ -45,4 +45,15 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<!-- this plugin will run the application as executable jar file -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
