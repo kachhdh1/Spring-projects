@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  todo-web-application:
+    image: the-boot #dvkdoc/the-boot:1.0
+    #build:
+      #context: .
+      #dockerfile: Dockerfile
+    ports:
+      - "8080:8082"
+    restart: always
+    depends_on: # Start the depends_on first
+      - mysql 
+    environment:
+      BOOT_HOSTNAME: mysql
+      BOOT_PORT: 3306
+      BOOT_DB_NAME: boot_db
+      BOOT_USERNAME: the-boot
+      BOOT_PASSWORD: the-boot
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: the-boot
+      MYSQL_USER: the-boot
+      MYSQL_PASSWORD: the-boot
+      MYSQL_DATABASE: boot_db
+    volumes:
+      - mysql-database-data-volume:/var/lib/mysql
+
+# Volumes
+volumes:
+  mysql-database-data-volume:

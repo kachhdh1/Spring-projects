@@ -1,5 +1,6 @@
 package com.main.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ public class Shipwreck {
 	Long id;
 	String name;
 	String description;
+	
+	//overriding column name as 'condition' is reserved in mysql
+	@Column(name="wrek_condition")
 	String condition;
 	Integer depth;
 	Double latitude;
