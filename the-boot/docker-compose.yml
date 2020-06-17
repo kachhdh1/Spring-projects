@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   todo-web-application:
-    image: the-boot #dvkdoc/the-boot:1.0
+    image: dvkdoc/the-boot:1.0
     #build:
       #context: .
       #dockerfile: Dockerfile
