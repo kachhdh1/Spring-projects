@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: the-boot-application
+  name: the-boot-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: the-boot-application
+  template:
+    metadata:
+      labels:
+        io.kompose.service: the-boot-application
+    spec:
+      containers:
+      - env:
+        - name: BOOT_DB_NAME
+          value: boot_db
+        - name: BOOT_HOSTNAME
+          value: mysql
+        - name: BOOT_PASSWORD
+          value: the-boot
+        - name: BOOT_PORT
+          value: "3306"
+        - name: BOOT_USERNAME
+          value: the-boot
+        image: dvkdoc/the-boot:1.0
+        imagePullPolicy: ""
+        name: the-boot-application
+        ports:
+        - containerPort: 8082
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
