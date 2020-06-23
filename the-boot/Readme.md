@@ -37,3 +37,21 @@ Run the spring boot app and mysql containers of version 1.0 from docker-compose.
 docker-compose up -d #start in background
 docker-compose down #stop the application
 ```
+
+## Kubernetes
+For Kubernetes deployment, there are two versions of application define. Navigate to the folder kubernetes-deployment and there are two folders 
+*  0.1-H2 version - aligns with the 0.1 version of docker image which is simple impplementation of H2 database. For deployment, navigate to the folder 0.1-H2 version and type below commands for kubernetes deployment
+
+```
+kubectl apply -f deployment-service.yaml 
+kubectl get all #to see all the kubernetes objects created
+```
+Get the public ip of the loadbalancer deployed and type `http://<load-balancer-ip>:8080`
+
+*  1.0-Mysql version - The application deployment has multiple kubernetes files for apps and services both for spring boot and mysql. This will create two loadbalancer objects, one for spring boot app and other for mysql which can be accessed publically outside. Alternatively, we can define NodePort for mysql in the **mysql-service.yaml** file for 'type' under spec. 
+
+
+```
+kubectl apply -f <all-files-comma-separated>
+kubectl apply -f .
+```
